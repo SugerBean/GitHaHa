@@ -27,7 +27,15 @@
     </div>
   </div>
   <div id="leftList" class="w-100">
-    <div class="left h-100"></div>
+    <div class="left h-100">
+      <ul class="list">
+        <li>我的信息</li>
+        <li>我的关注</li>
+        <li>我的收藏</li>
+        <li>我的点赞</li>
+        <li>我的歌单</li>
+      </ul>
+    </div>
   </div>
 </div>
 </template>
@@ -40,6 +48,7 @@
         left:66,
         bool:false,
         ismin:false,
+        leftListShow:false,
       }
     },
     methods :{
@@ -93,7 +102,13 @@
         }
       },
       showLeftList(){
-
+        var leftList = document.getElementById('leftList');
+        if(this.leftListShow){
+          leftList.style.left = "-414px";
+        }else{
+          leftList.style.left = 0;
+        }
+        this.leftListShow = !this.leftListShow;
       }
     },
     created (){
@@ -203,14 +218,28 @@
   /**左边列表 */
   #leftList{
     z-index: 999;
-    height: 91%;
+    height: 92%;
     position: absolute;
-    top:9%;
-    background: rgba(0, 0, 0, 0.37);
+    top:8%;
+    left: -414px;
+    background: rgba(255, 255, 255, 0);
+    transition: all .2s linear;
+    position: fixed;
   }
   #leftList>.left{
     width: 50%;
     background: #fff;
+  }
+  #leftList>.left>.list{
+    height: 100%;
+  }
+  #leftList>.left>.list>li{
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid rgba(165, 164, 164, 0.486);
+  }
+  #leftList>.left>.list>li:hover{
+    background: rgba(165, 164, 164, 0.486);
   }
   /** 公共样式*/
   .h-100{
