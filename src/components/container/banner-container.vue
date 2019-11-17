@@ -1,5 +1,11 @@
 <template>
-  <mt-tab-container v-model="action">
+  <mt-tab-container v-model="active">
+    <!-- 星球页面 Start -->
+    <mt-tab-container-item id="peoples">
+      星球页面
+    </mt-tab-container-item>
+    <!-- 星球页面 End -->
+    <!-- 广场页面 Start -->
     <mt-tab-container-item id="msgList">
       <div class="content w-100" v-for="(item , i) of usemsg" :key="i">
         <div class="title">
@@ -18,6 +24,17 @@
         </div>
       </div>
     </mt-tab-container-item>
+    <!-- 广场页面 End -->
+    <!-- 聊天页面 Start -->
+    <mt-tab-container-item id="message">
+      聊天页面
+    </mt-tab-container-item>
+    <!-- 聊天页面 End -->
+    <!-- 我的页面 Start -->
+    <mt-tab-container-item id="me">
+      我的页面
+    </mt-tab-container-item>
+    <!-- 我的页面 End -->
   </mt-tab-container>
 </template>
 
@@ -25,7 +42,7 @@
 export default {
   data() {
     return {
-      action: "msgList",
+      active: "msgList",
       downBtnTop: 0,
       usemsg: [
         {
@@ -52,36 +69,41 @@ export default {
     };
   },
   methods: {
-    isShow(j) {
+    isShow(j) {// 判断更多按钮什么时候出现
       var bool = "";
       var height = 0;
-      if (this.usemsg[j].textMsg.length > 100) {
+      if (this.usemsg[j].textMsg.length > 100) { // 如果文字长度大于100 时就出现
         bool = true;
       } else {
         bool = false;
       }
       return bool;
     },
-    down(event,f) {
+    down(event,f) {// 点击更多按钮时增加最大高度
       var message = document.getElementsByClassName("message")[f];
       var msgHeight = message.offsetHeight; //获取当前点击的文本框的高度
       message.style.maxHeight = "270px";
       event.target.classList.add("show");//让更多按钮隐藏
       message.nextElementSibling.lastElementChild.classList.remove("show")//收起按钮显示
     },
-    up(event,f) {
+    up(event,f) {// 点击收起按钮时减小最大高度
       var message = document.getElementsByClassName("message")[f];
       message.style.maxHeight = "167px"
       event.target.classList.add("show");//让更多按钮隐藏
       message.nextElementSibling.firstElementChild.classList.remove("show")//收起按钮显示
+    },
+    addActive(val){// 接收点击tabbar按钮使传过来的参数
+      this.active = val;
     }
   },
-  created: function() {}
+  created: function() {// 绑定修改active值 的函数 [兄弟传参]
+    this.bus.$on('addActive',this.addActive.bind(this));
+  }
 };
 </script>
 
 <style scoped>
-
+/***用户发表动态模块 */
 .content {
   box-sizing: border-box;
   padding: 0 10px;
@@ -97,17 +119,20 @@ export default {
   align-items: center;
   position: relative;
 }
+/***发表文章时用户的头像 */
 .content > .title > .header {
   width: 40px;
   height: 40px;
   border-radius: 50%;
 }
+/***用户名 */
 .content > .title > .name {
   font-size: 16px;
   font-weight: 700;
   position: absolute;
   left: 45px;
 }
+/***右边按钮 */
 .content > .title > .btn {
   width: 22px;
   height: 22px;
@@ -115,6 +140,7 @@ export default {
   outline: none;
   background: none;
 }
+/***文章内容 */
 .content > .message {
   width: 86%;
   max-height: 172px;
@@ -128,11 +154,13 @@ export default {
 .show {
   display: none;
 }
+/***更多按钮的样式 */
 .content > .downBtn {
   width: 100%;
   margin-top: 0px;
   clear: both;
 }
+/***公用样式 */
 .w-100 {
   width: 100%;
 }

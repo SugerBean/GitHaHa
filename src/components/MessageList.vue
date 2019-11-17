@@ -2,7 +2,7 @@
   <div class="box">
     <nav-title></nav-title>
     <msg-list class="msglist"></msg-list>
-    <botm-btn></botm-btn>
+    <botm-btn id="btns"></botm-btn>
   </div>
 </template>
 
@@ -29,5 +29,8 @@ export default {
   }
   .msglist{
     margin-top: 100px;
+  }
+  #btns{
+    position: fixed;
   }
 </style>

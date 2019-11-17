@@ -129,6 +129,7 @@
     justify-content: space-between;
     flex-wrap: wrap;
     position: fixed;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.164);
     z-index: 999;
   }
   /* 左边用户头像 */
@@ -222,7 +223,7 @@
     position: absolute;
     top:8%;
     left: -414px;
-    background: rgba(255, 255, 255, 0);
+    background: rgba(0, 0, 0, 0.274);
     transition: all .2s linear;
     position: fixed;
   }
