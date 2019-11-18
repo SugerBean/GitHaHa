@@ -2,7 +2,7 @@
 <div>
   <div id="nav" class="w-100">
     <div class="headImg">
-      <img @click="showLeftList" class="w-100" src="../../../static/public/images/icon/header.png">
+      <van-image is-link @click="showPopup" round width="40px" height="40px" src="../../../static/public/images/icon/header.png"/>
     </div>
     <ul class="nav_text">
       <div class="bg h-100 " :style="`left:${left}px`">
@@ -26,7 +26,7 @@
       <img src="../../../static/public/images/icon/search.png">
     </div>
   </div>
-  <div id="leftList" class="w-100">
+  <!-- <div id="leftList" class="w-100">
     <div class="left h-100">
       <ul class="list">
         <li>我的信息</li>
@@ -36,7 +36,9 @@
         <li>我的歌单</li>
       </ul>
     </div>
-  </div>
+  </div> -->
+  <!-- <van-cell >展示弹出层</van-cell> -->
+  <van-popup v-model="show" position="left" :style="{ height: '100%',width:'80%'}">内容</van-popup>
 </div>
 </template>
 
@@ -49,9 +51,13 @@
         bool:false,
         ismin:false,
         leftListShow:false,
+        show:false,
       }
     },
     methods :{
+      showPopup(){
+        this.show = !this.show;
+      },
       isfocus(e,i){
         // 获取当前被点击元素的自定义属性
         this.aValue = e.target.getAttribute('data-id');
@@ -130,7 +136,7 @@
     flex-wrap: wrap;
     position: fixed;
     border-bottom: 1px solid rgba(0, 0, 0, 0.164);
-    z-index: 999;
+    z-index: 10;
   }
   /* 左边用户头像 */
   #nav>.headImg{
@@ -199,6 +205,7 @@
     left: -10px;
     transition: all .3s linear;
     border-radius: 20px;
+    z-index: 9;
   }
   #nav>.search>input{
     height: 38px;
@@ -216,9 +223,12 @@
     left: 20px;
     top: 5px;
   }
+  .van-overlay{
+    z-index: 9 !important;
+  }
   /**左边列表 */
-  #leftList{
-    z-index: 999;
+  /* #leftList{
+    z-index: 10;
     height: 92%;
     position: absolute;
     top:8%;
@@ -241,7 +251,7 @@
   }
   #leftList>.left>.list>li:hover{
     background: rgba(165, 164, 164, 0.486);
-  }
+  } */
   /** 公共样式*/
   .h-100{
     height: 100%;

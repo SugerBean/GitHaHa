@@ -6,6 +6,9 @@ import router from './router'
 import mintui from 'mint-ui'
 import animate from 'animate.css'
 import bus from './components/Bus'
+import Vant from 'vant'
+import 'vant/lib/index.css'
+Vue.use(Vant)
 
 Vue.prototype.bus = bus;
 

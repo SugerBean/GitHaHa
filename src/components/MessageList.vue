@@ -10,6 +10,7 @@
 import navTitle from './Title_vue/MessageTitle'
 import msglist from './container/banner-container'
 import botmBtn from './bottomBtn/bottomBtn'
+
 export default {
   data () {
     return {

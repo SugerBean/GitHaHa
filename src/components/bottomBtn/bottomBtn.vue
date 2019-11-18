@@ -1,5 +1,5 @@
 <template>
-  <mt-tabbar v-model="active">
+  <mt-tabbar class="nav_tabbar" v-model="active">
     <mt-tab-item id="peoples">
       <img slot="icon" :src="active=='people'?'../../../static/public/images/icon/PeopleSelected.png':'../../../static/public/images/icon/People.png'"/>
       芸芸众生
@@ -47,6 +47,9 @@ export default {
 </script>
 
 <style scoped>
+  .nav_tabbar{
+    z-index: 11;
+  }
   #sendMessage{
     width: 20%;
     height: 56px;
